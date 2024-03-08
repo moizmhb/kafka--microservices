@@ -2,7 +2,7 @@
 This project demonstrates a system for processing orders using microservices architecture, Kafka messaging, and the Saga pattern. It consists of four microservices: order, stock, payment, and notification service.
 ## High level architecture:
 <p align="center">
-<img src="https://raw.githubusercontent.com/moizmhb/kafka--microservices/main/resources/readme-images/architecture.png" alt="" width="50%"/>
+<img src="https://raw.githubusercontent.com/moizmhb/kafka--microservices/master/resources/readme-images/architecture.png" alt="" width="50%"/>
 </p>
 
 
@@ -29,11 +29,11 @@ Example: localhost:8080/api/v1/order?o=2&i=3 will send 2 orders, each containing
 ## How it works:
 Upon receiving a new order, the order service initiates processing and sends an event to Kafka:
 <p align="center">
-<img src="https://raw.githubusercontent.com/moizmhb/kafka--microservices/main/resources/readme-images/step1.png" alt="" width="50%"/>
+<img src="https://raw.githubusercontent.com/moizmhb/kafka--microservices/master/resources/readme-images/step1.png" alt="" width="50%"/>
 </p>
 All microservices involved perform their respective operations and report back to Kafka with confirmation (success/failure).
 <p align="center">
-<img src="https://raw.githubusercontent.com/moizmhb/kafka--microservices/main/resources/readme-images/step2.png" alt="" width="50%"/>
+<img src="https://raw.githubusercontent.com/moizmhb/kafka--microservices/master/resources/readme-images/step2.png" alt="" width="50%"/>
 </p>
 The order service uses Kafka Streams to aggregate all confirmations received. If all services report success, the order is considered complete. If any service reports failure, the order service triggers a rollback event processed by all other services.
 Order service also sends the final order status to Kafka, notification service simulates then a notification message to user informing the final status of his/her order:
